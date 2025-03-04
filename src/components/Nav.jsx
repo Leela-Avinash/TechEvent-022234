@@ -90,9 +90,8 @@ const NavOverlay = ({ isOpen, setIsOpen }) => {
 
     return (
         <div
-            className={`fixed inset-0 z-50 flex items-center justify-center overflow-hidden transition-all duration-300 ${
-                isOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
-            }`}
+            className={`fixed inset-0 z-50 flex items-center justify-center overflow-hidden transition-all duration-300 ${isOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+                }`}
         >
             <div
                 ref={leftRef}
@@ -125,30 +124,30 @@ const NavOverlay = ({ isOpen, setIsOpen }) => {
                         return (
                             <li
                                 key={index}
-                                className={`text-2xl uppercase tracking-widest transition-colors cursor-pointer relative inline-block px-8 py-4 ${
-                                    isUnlocked
-                                        ? "text-teal-400 hover:text-pink-500"
-                                        : "text-gray-500 cursor-not-allowed opacity-50"
-                                }`}
-                                style={{
-                                    clipPath:
-                                        "polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)",
-                                    background: "rgba(255, 255, 255, 0.1)",
-                                }}
+                                className={`text-2xl uppercase tracking-widest transition-colors cursor-pointer relative inline-block px-8 py-4 ${isUnlocked
+                                    ? "text-[#00FFFF] hover:text-[#f1efef]"  // Cyan to Magenta on hover
+                                    : "text-gray-500 cursor-not-allowed opacity-50"
+                                    }`}
                                 onClick={() => {
                                     if (isUnlocked) {
-                                        console.log(`Navigating to: ${item.url}`);
                                         navigate(item.url, { replace: true });
-                                        closeNavAnimation()
-
-                                        // setTimeout(() => {
-                                        //     document.body.click(); 
-                                        // }, 100);
+                                        closeNavAnimation();
                                     }
                                 }}
-                                                          
                             >
-                                {item.level}
+                                {/* Hexagonal Shape */}
+                                <div
+                                    className={`relative inline-block px-10 py-5 border-2 ${isUnlocked ? "border-teal-400 hover:border-white" : "border-gray-500"
+                                        }`}
+                                    style={{
+                                        clipPath:
+                                            "polygon(25% 0%, 75% 0%, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0% 75%, 0% 25%)",
+                                        background: isUnlocked ? "rgba(0, 255, 255, 0.1)" : "rgba(100, 100, 100, 0.1)",
+                                        transition: "all 0.3s ease-in-out",
+                                    }}
+                                >
+                                    {item.level}
+                                </div>
                             </li>
                         );
                     })}

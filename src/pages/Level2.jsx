@@ -12,6 +12,10 @@ const Puzzle = ({ gridSize = 4, imageUrl = "/images/puzzle.png" }) => {
         (_, i) => (i + 1) % totalTiles
     );
 
+    const alreadySolved = localStorage.getItem("puzzleSolved");
+    if(alreadySolved) {
+        dispatch(completeLevel("level2"));
+    }
     const isSolvable = (arr) => {
         let inversions = 0;
         for (let i = 0; i < arr.length; i++) {
@@ -95,8 +99,8 @@ const Puzzle = ({ gridSize = 4, imageUrl = "/images/puzzle.png" }) => {
             setBoard(newBoard);
             setMoveCount((prev) => prev + 1);
             if (isSolved(newBoard)) {
-                const alreadySolved = localStorage.getItem("puzzleSolved");
                 if (!alreadySolved) {
+                    console.log("here")
                     localStorage.setItem("puzzleSolved", "true");
                     const email = localStorage.getItem("userEmail");
                     if (!email) {
@@ -136,9 +140,6 @@ const Puzzle = ({ gridSize = 4, imageUrl = "/images/puzzle.png" }) => {
                     setTimeout(() => alert("Puzzle solved!"), 100);
                     dispatch(completeLevel("level2"));
                     navigate("/level2story");
-                }
-                else {
-                    dispatch(completeLevel("level2"));
                 }
             }
         }

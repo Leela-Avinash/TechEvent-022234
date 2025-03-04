@@ -18,6 +18,7 @@ const App = () => {
             <Routes>
                 <Route path="/" element={<Loadingpage />} />
                 <Route path="/login" element={<Loginpage />} />
+                <Route path="/nav" element={<NavPage />} />
                 <Route path="/story" element={<CinematicSequence />} />
                 <Route path="/level1story" element={<Level1Story />} />
                 <Route path="/level2story" element={<Level2Story />} />
